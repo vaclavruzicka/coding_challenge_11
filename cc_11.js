@@ -5,17 +5,17 @@ class Book {
     constructor (title, author, isbn, copies) {
         this.title = title //Sources title in the instance.
         this.author = author //Sources author in the instance.
-        this.isbm = isbn //Sources isbn in the instance.
+        this.isbn = isbn //Sources isbn in the instance.
         this.copies = copies //Sources copies in the instnace.
     }
 
     //Creating a method that retrieves the details of a book and returns it using a template literal.
-    getDetails(){
+    getDetails() {
         return `Title: ${this.title}, Author: ${this.author}, ISBN: ${this.isbn}, Copies: ${this.copies}`
     }
 
     //Creating a method that updates the copies avilable when a book is checked out or returned.
-    updateCopies(quantity){
+    updateCopies(quantity) {
         this.copies += quantity //Adds the quantity to the copies to allow for a negative number to represent a check out and a positive number to represent a return.
     }
 }
@@ -34,7 +34,7 @@ console.log(book1.getDetails())
 
 //Task 2 - Creating a Borrower Class
 
-//Creating a class named Borrower using the consturcotr method.
+//Creating a class named Borrower using the constructor method.
 class Borrower {
     constructor (name, borrowerID,) {
         this.name = name //Sources name in the instance.
@@ -67,3 +67,33 @@ borrower1.returnBook("The Great Gatsby")
 
 //Loggine the updated array.
 console.log(borrower1.borrowedBooks)
+
+//Task 3 - Creating a Library Class
+
+//Creating a class named Library using the constructor method.
+class Library {
+    constructor () {
+    this.books = [] //Sets an empty array for books to be input in.
+    this.borrowers = [] //Sets an empty array for borrowers to be input in.
+    }
+
+    //Creating a method that adds preexisting books to the library's array using push.
+    addBook(book) {
+        this.books.push(book)
+    }
+
+    //Creating a method that lists the details of each book in the array using For Each.
+    listBooks() {
+       this.books.forEach(book => console.log(`Title: ${book.title}, Author: ${book.author}, ISBN: ${book.isbn}, Copies: ${book.copies}`))
+    
+       }
+    }
+
+//Creating a new liibrary using the constructor.
+const library = new Library()
+
+//Adding a prexisting book to the library.
+library.addBook(book1)
+
+//Returing the details of the library's book array.
+library.listBooks()
