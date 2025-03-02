@@ -86,10 +86,34 @@ class Library {
     listBooks() {
        this.books.forEach(book => console.log(`Title: ${book.title}, Author: ${book.author}, ISBN: ${book.isbn}, Copies: ${book.copies}`))
     
-       }
     }
+    
+    //Task 4 - Implementing Book Borrowing
 
-//Creating a new liibrary using the constructor.
+    //Created a method that adds a borrower to the  library's borrower array based.
+    addBorrower(borrower) {
+        this.borrowers.push(borrower)
+    }
+    
+    //Created a method that finds a book and a borrower based on their isbn and borrowerID.
+    //It then makes sure both of these exist and that the copies of the book is greater than zero.
+    //Finally, if all of these conditions true, then it reduces the book copies by one and then adds the book title to the borrowers borrowed book array.
+    lendBook(borrowerID, isbn) {
+        const book = this.books.find(bk => bk.isbn === isbn)
+        const borrower = this.borrowers.find(br => br.borrowerID === borrowerID)
+
+        if (!book || book.copies <= 0 || !borrower) {
+            return `No more copies available.`
+        } else {
+            book.copies -= 1
+            borrower.borrowBook(book.title)
+        }
+    }
+}
+
+//Task 3 - Creating a Library Class
+
+//Creating a new library using the constructor.
 const library = new Library()
 
 //Adding a prexisting book to the library.
@@ -97,3 +121,17 @@ library.addBook(book1)
 
 //Returing the details of the library's book array.
 library.listBooks()
+
+//Task 4 - Implementing Book Borrowing
+
+//Adding the pre-existing borrower to the library's borrower array.
+library.addBorrower(borrower1)
+
+//Lending the book to the borrower based on the borrower ID and the ISBN
+library.lendBook(201, 123456)
+
+//Logging the books details to make sure the copies decreased.
+console.log(book1.getDetails())
+
+//Logging the borrower's borrowed books to make sure the array updated.
+console.log(borrower1.borrowedBooks)
