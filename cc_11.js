@@ -97,7 +97,7 @@ class Library {
     
     //Created a method that finds a book and a borrower based on their isbn and borrowerID.
     //It then makes sure both of these exist and that the copies of the book is greater than zero.
-    //Finally, if all of these conditions true, then it reduces the book copies by one and then adds the book title to the borrowers borrowed book array.
+    //Finally, if all of these conditions are met, then it reduces the book copies by one and then adds the book title to the borrower's borrowed book array.
     lendBook(borrowerID, isbn) {
         const book = this.books.find(bk => bk.isbn === isbn)
         const borrower = this.borrowers.find(br => br.borrowerID === borrowerID)
@@ -107,6 +107,23 @@ class Library {
         } else {
             book.copies -= 1
             borrower.borrowBook(book.title)
+        }
+    }
+
+    //Task 5 - Implementing Book Returns
+
+    //Creating a method that finds a book and a borrower based on their ISBN and borrowerID.
+    //It them makes sure both of them exist.
+    //Finally, if both of these conditions are met, it increases the book copies by one and removes the book title from the borrower's borrowed book array.
+    returnBoook(borrowerID, isbn) {
+        const book = this.books.find(bk => bk.isbn === isbn)
+        const borrower = this.borrowers.find(br => br.borrowerID === borrowerID)
+
+        if (!book || !borrowerID) {
+            return `No checked out books find.`
+        } else {
+            book.copies += 1
+            borrower.returnBook(book.title)
         }
     }
 }
@@ -134,4 +151,15 @@ library.lendBook(201, 123456)
 console.log(book1.getDetails())
 
 //Logging the borrower's borrowed books to make sure the array updated.
+console.log(borrower1.borrowedBooks)
+
+//Task 5 - Implementing Book Returns
+
+//Retruning the book to the library from the borrower.
+library.returnBoook(201, 123456)
+
+//Logging the books details after the return.
+console.log(book1.getDetails())
+
+//Logging the borrower's updated borrowed books array.
 console.log(borrower1.borrowedBooks)
